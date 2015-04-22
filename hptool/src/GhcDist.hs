@@ -101,7 +101,7 @@ getCppCommand settings settingsFile = do
     -- It's possible we could use a better heuristic here for cpphs, if that is
     -- ever used in the future we may be able to simply look at the basename
     -- of cppCommand.
-    (Stdout cppVersion, Stderr _) <- command [] cppCommand ["--version"]
+    Stdout cppVersion <- command [] cppCommand ["--version"]
     return . listToMaybe $
         filter ((`isInfixOf` cppVersion) . cppCommandName) [minBound .. maxBound]
 
